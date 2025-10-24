@@ -38,3 +38,45 @@
   - Referee
 4. ETC
   - Validator
+  - Parer
+
+## 기능 목록
+
+### View
+#### `getInput() => string`
+> 사용자에게 입력을 받는 메서드
+
+#### `print() => void`
+> 출력 메서드
+
+### Car
+
+#### `accelerate() => void`
+> 차량을 가속하는 메서드
+
+### Referee
+
+#### `getWinner(Car[]) => string[]`
+
+### Validator
+
+#### `isMoreThanOne(string) => void`
+> 문자열 길이가 1이상인지 검증하는 메서드
+
+#### `isLessThanFive(string) => void`
+> 문자열 길이가 5이하인지 검증하는 메서드
+
+#### `isDuplicationExist(string[]) => void`
+> 배열에 중복된 문자열이 있는지 검증하는 메서드
+
+#### `isNumber(any) => void`
+> 숫자인지 검증하는 메서드
+
+#### `isPositive(number) => void`
+> 양수인지 검증하는 메서드
+
+
+### Parser
+
+#### `parsePlayer(string) => string[]`
+> 문자열로부터 플레이어를 파싱하는 메서드
