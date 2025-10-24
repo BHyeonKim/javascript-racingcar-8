@@ -112,4 +112,37 @@ describe('Validator Class', () => {
       expect(() => Validator.validateNumber(input)).not.toThrow();
     });
   });
+  describe('validatePositiveNumber', () => {
+    it('should throw an error if input is not a number', () => {
+      const input = [undefined, null, [], {}, 'string'];
+
+      input.forEach((value) => {
+        expect(() => Validator.validatePositiveNumber(value)).toThrow(
+          ERROR_MESSAGE.NOT_NUMBER,
+        );
+      });
+    });
+
+    it('should throw an error if input is negative number', () => {
+      const input = -10;
+
+      expect(() => Validator.validatePositiveNumber(input)).toThrow(
+        ERROR_MESSAGE.NOT_POSITIVE_NUMBER,
+      );
+    });
+
+    it('should throw an error if input is zero', () => {
+      const input = 0;
+
+      expect(() => Validator.validatePositiveNumber(input)).toThrow(
+        ERROR_MESSAGE.NOT_POSITIVE_NUMBER,
+      );
+    });
+
+    it('should not throw an error if input is positive number', () => {
+      const input = 10;
+
+      expect(() => Validator.validatePositiveNumber(input)).not.toThrow();
+    });
+  });
 });
