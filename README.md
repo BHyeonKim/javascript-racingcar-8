@@ -60,21 +60,23 @@
 
 ### Validator
 
-#### `isMoreThanOne(string) => void`
+#### `validateMoreThanOne(string) => void`
 > 문자열 길이가 1이상인지 검증하는 메서드
 
-#### `isLessThanFive(string) => void`
+#### `validateLessThanFive(string) => void`
 > 문자열 길이가 5이하인지 검증하는 메서드
 
-#### `isDuplicationExist(string[]) => void`
+#### `validateNoDuplication(string[]) => void`
 > 배열에 중복된 문자열이 있는지 검증하는 메서드
 
-#### `isNumber(any) => void`
+#### `validateNumber(any) => void`
 > 숫자인지 검증하는 메서드
 
-#### `isPositive(number) => void`
+#### `validatePositiveNumber(number) => void`
 > 양수인지 검증하는 메서드
 
+#### `validateIsArray(arr) => void`
+> 배열인지 검증하는 메서드
 
 ### Parser
 
