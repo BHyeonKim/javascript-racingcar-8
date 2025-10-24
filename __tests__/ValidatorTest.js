@@ -145,4 +145,21 @@ describe('Validator Class', () => {
       expect(() => Validator.validatePositiveNumber(input)).not.toThrow();
     });
   });
+  describe('validateIsArray', () => {
+    it('should throw an error if input is not an array', () => {
+      const input = ['string', {}, 0, undefined, null];
+
+      input.forEach((value) => {
+        expect(() => Validator.validateIsArray(value)).toThrow(
+          ERROR_MESSAGE.NOT_ARRAY,
+        );
+      });
+    });
+
+    it('should not throw an error if input is an array', () => {
+      const input = [];
+
+      expect(() => Validator.validateIsArray(input)).not.toThrow();
+    });
+  });
 });
