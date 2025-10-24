@@ -1,7 +1,7 @@
 import ERROR_MESSAGE from './constants/error.js';
 
 class Validator {
-  static validateMoreThanOneCharacter(string) {
+  static validateNotEmptyString(string) {
     if (string.length < 1) {
       throw new Error(ERROR_MESSAGE.EMPTY_STRING);
     }

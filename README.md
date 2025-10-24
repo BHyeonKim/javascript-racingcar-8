@@ -60,7 +60,7 @@
 
 ### Validator
 
-#### `validateMoreThanOne(string) => void`
+#### `validateNotEmptyString(string) => void`
 > 문자열 길이가 1이상인지 검증하는 메서드
 
 #### `validateLessThanFive(string) => void`
