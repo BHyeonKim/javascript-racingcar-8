@@ -43,11 +43,11 @@
 ## 기능 목록
 
 ### View
-#### `getInput() => string`
-> - [ ] 사용자에게 입력을 받는 메서드
+#### `getInput(string) => string`
+> - [x] 사용자에게 입력을 받는 메서드
 
 #### `print() => void`
-> - [ ] 출력 메서드
+> - [x] 출력 메서드
 
 ### Car
 
