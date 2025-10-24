@@ -29,4 +29,30 @@ describe('Validator Class', () => {
       expect(() => Validator.validateNotEmptyString(string)).not.toThrow();
     });
   });
+
+  describe('validateNotExceedFiveCharacter Method', () => {
+    it('should throw an error if length of string is more than 5', () => {
+      const string = 'abcdef';
+
+      expect(() => Validator.validateNotExceedFiveCharacter(string)).toThrow(
+        ERROR_MESSAGE.EXCEEDED_FIVE_CHARACTER,
+      );
+    });
+
+    it('should not throw an error if length of string is 5', () => {
+      const string = 'abcde';
+
+      expect(() =>
+        Validator.validateNotExceedFiveCharacter(string),
+      ).not.toThrow();
+    });
+
+    it('should not throw an error if length of string is less than 5', () => {
+      const string = 'a';
+
+      expect(() =>
+        Validator.validateNotExceedFiveCharacter(string),
+      ).not.toThrow();
+    });
+  });
 });
