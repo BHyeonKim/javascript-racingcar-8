@@ -95,4 +95,21 @@ describe('Validator Class', () => {
       expect(() => Validator.validateNoDuplication(input)).not.toThrow();
     });
   });
+  describe('validateNumber', () => {
+    it('should throw an error if input is not a number', () => {
+      const input = [undefined, null, [], {}, 'string'];
+
+      input.forEach((value) => {
+        expect(() => Validator.validateNumber(value)).toThrow(
+          ERROR_MESSAGE.NOT_NUMBER,
+        );
+      });
+    });
+
+    it('should not throw an error if input is a number', () => {
+      const input = 10;
+
+      expect(() => Validator.validateNumber(input)).not.toThrow();
+    });
+  });
 });
