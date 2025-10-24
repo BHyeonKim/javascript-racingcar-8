@@ -24,7 +24,7 @@ class Validator {
   }
 
   static validateNumber(number) {
-    if (Number.isNaN(number)) {
+    if (typeof number !== 'number' || Number.isNaN(number)) {
       throw new Error(ERROR_MESSAGE.NOT_NUMBER);
     }
   }
