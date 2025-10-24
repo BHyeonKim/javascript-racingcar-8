@@ -44,41 +44,42 @@
 
 ### View
 #### `getInput() => string`
-> 사용자에게 입력을 받는 메서드
+> - [ ] 사용자에게 입력을 받는 메서드
 
 #### `print() => void`
-> 출력 메서드
+> - [ ] 출력 메서드
 
 ### Car
 
 #### `accelerate() => void`
-> 차량을 가속하는 메서드
+> - [ ] 차량을 가속하는 메서드
 
 ### Referee
 
 #### `getWinner(Car[]) => string[]`
+> - [ ] 우승자 이름의 배열을 반환하는 메소드
 
 ### Validator
 
 #### `validateNotEmptyString(string) => void`
-> 문자열 길이가 1이상인지 검증하는 메서드
+> - [x] 문자열 길이가 1이상인지 검증하는 메서드
 
 #### `validateNotExceedFiveCharacter(string) => void`
-> 문자열 길이가 5이하인지 검증하는 메서드
+> - [x] 문자열 길이가 5이하인지 검증하는 메서드
 
 #### `validateNoDuplication(string[]) => void`
-> 배열에 중복된 문자열이 있는지 검증하는 메서드
+> - [x] 배열에 중복된 문자열이 있는지 검증하는 메서드
 
 #### `validateNumber(any) => void`
-> 숫자인지 검증하는 메서드
+> - [x] 숫자인지 검증하는 메서드
 
 #### `validatePositiveNumber(number) => void`
-> 양수인지 검증하는 메서드
+> - [x] 양수인지 검증하는 메서드
 
 #### `validateIsArray(arr) => void`
-> 배열인지 검증하는 메서드
+> - [x] 배열인지 검증하는 메서드
 
 ### Parser
 
 #### `parsePlayer(string) => string[]`
-> 문자열로부터 플레이어를 파싱하는 메서드
+> - [ ] 문자열로부터 플레이어를 파싱하는 메서드
