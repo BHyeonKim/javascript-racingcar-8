@@ -7,7 +7,7 @@ class Validator {
     }
   }
 
-  static validateLessThanFiveCharacter(string) {
+  static validateNotExceedFiveCharacter(string) {
     if (string.length > 5) {
       throw new Error(ERROR_MESSAGE.EXCEED_FIVE_CHARACTER);
     }

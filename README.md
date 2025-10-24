@@ -63,7 +63,7 @@
 #### `validateNotEmptyString(string) => void`
 > 문자열 길이가 1이상인지 검증하는 메서드
 
-#### `validateLessThanFive(string) => void`
+#### `validateNotExceedFiveCharacter(string) => void`
 > 문자열 길이가 5이하인지 검증하는 메서드
 
 #### `validateNoDuplication(string[]) => void`
