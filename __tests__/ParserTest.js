@@ -61,4 +61,38 @@ describe('Parser Class', () => {
       expect(result).toEqual(['pobi']);
     });
   });
+
+  describe('parseRound Method', () => {
+    it('should throw an error if input is not a positive number', () => {
+      const input = '0';
+
+      expect(() => Parser.parseRound(input)).toThrow(
+        ERROR_MESSAGE.NOT_POSITIVE_NUMBER,
+      );
+    });
+
+    it('should throw an error if input is negative number', () => {
+      const input = '-5';
+
+      expect(() => Parser.parseRound(input)).toThrow(
+        ERROR_MESSAGE.NOT_POSITIVE_NUMBER,
+      );
+    });
+
+    it('should throw an error if input is not a number', () => {
+      const input = 'abc';
+
+      expect(() => Parser.parseRound(input)).toThrow(
+        ERROR_MESSAGE.NOT_NUMBER,
+      );
+    });
+
+    it('should correctly parse valid positive number string', () => {
+      const input = '5';
+
+      const result = Parser.parseRound(input);
+
+      expect(result).toBe(5);
+    });
+  })
 });
