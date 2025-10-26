@@ -1,5 +1,6 @@
 import ERROR_MESSAGE from '../src/constants/error.js';
 import Validator from '../src/Validator.js';
+import Car from '../src/model/Car.js';
 
 describe('Validator Class', () => {
   describe('validateNotEmptyString Method', () => {
@@ -160,6 +161,24 @@ describe('Validator Class', () => {
       const input = [];
 
       expect(() => Validator.validateIsArray(input)).not.toThrow();
+    });
+  });
+
+  describe('validateIsCar', () => {
+    it('should throw an error if input is not an array of car', () => {
+      const testCases = [{}, [], ' ', 1, undefined, null, true];
+
+      testCases.forEach((testCase) => {
+        expect(() => Validator.validateIsCar(testCase)).toThrow(
+          ERROR_MESSAGE.NOT_CAR,
+        );
+      });
+    });
+
+    it('should not throw an error if input is instance of Car', () => {
+      const input = new Car('test');
+
+      expect(() => Validator.validateIsCar(input)).not.toThrow();
     });
   });
 });
