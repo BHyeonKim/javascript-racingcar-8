@@ -1,0 +1,7 @@
+const GAME_CONSTANT = {
+  RANDOM_START: 0,
+  RAMDOM_END: 9,
+  THRESHOLD: 4,
+};
+
+export default GAME_CONSTANT;

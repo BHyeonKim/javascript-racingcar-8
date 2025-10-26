@@ -1,5 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Validator from '../utils/Validator.js';
+import GAME_CONSTANT from '../constants/gameConstant.js';
 
 class Referee {
   static getWinningCars(cars) {
@@ -43,14 +44,17 @@ class Referee {
     cars.forEach((car) => {
       const randomNumber = Referee.generateRandomNumber();
 
-      if (randomNumber >= 4) {
+      if (randomNumber >= GAME_CONSTANT.THRESHOLD) {
         car.move();
       }
     });
   }
 
   static generateRandomNumber() {
-    return MissionUtils.Random.pickNumberInRange(0, 9);
+    return MissionUtils.Random.pickNumberInRange(
+      GAME_CONSTANT.RANDOM_START,
+      GAME_CONSTANT.RAMDOM_END,
+    );
   }
 }
 
