@@ -5,6 +5,7 @@ const ERROR_MESSAGE = {
   NOT_NUMBER: '숫자가 아닙니다.',
   NOT_POSITIVE_NUMBER: '양수가 아닙니다.',
   NOT_ARRAY: '배열이 아닙니다.',
+  NOT_CAR: '자동차가 아닙니다.',
 };
 
 export default ERROR_MESSAGE;

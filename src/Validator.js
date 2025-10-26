@@ -1,3 +1,4 @@
+import Car from './model/Car.js';
 import ERROR_MESSAGE from './constants/error.js';
 
 class Validator {
@@ -40,6 +41,12 @@ class Validator {
   static validateIsArray(arr) {
     if (!Array.isArray(arr)) {
       throw new Error(ERROR_MESSAGE.NOT_ARRAY);
+    }
+  }
+
+  static validateIsCar(car) {
+    if (!(typeof car === 'object' && car instanceof Car)) {
+      throw new Error(ERROR_MESSAGE.NOT_CAR);
     }
   }
 }
