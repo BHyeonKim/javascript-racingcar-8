@@ -49,4 +49,42 @@ describe('Referee class', () => {
       });
     });
   });
+  describe('getDriverNames Method', () => {
+    it('should return array of driver names', () => {
+      const carA = new Car('test1', 1);
+      const carB = new Car('test2', 2);
+      const carC = new Car('test3', 3);
+
+      expect(Referee.getDriverNames([carA, carB, carC])).toEqual([
+        carA.driverName,
+        carB.driverName,
+        carC.driverName,
+      ]);
+    });
+
+    it('should throw an error if input is not an array', () => {
+      const testCases = [' ', 5, false, {}];
+
+      testCases.forEach((testcase) => {
+        expect(() => Referee.getWinningCars(testcase)).toThrow(
+          ERROR_MESSAGE.NOT_ARRAY,
+        );
+      });
+    });
+
+    it('should throw an error if input is not array of cars', () => {
+      const testCases = [
+        [{}, {}, {}],
+        [5, 6, 7],
+        [' ', ' '],
+        [false, true],
+      ];
+
+      testCases.forEach((testCase) => {
+        expect(() => Referee.getWinningCars(testCase)).toThrow(
+          ERROR_MESSAGE.NOT_CAR,
+        );
+      });
+    });
+  });
 });
