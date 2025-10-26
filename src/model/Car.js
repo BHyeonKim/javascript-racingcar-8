@@ -3,9 +3,9 @@ class Car {
 
   #distance;
 
-  constructor(driverName) {
+  constructor(driverName, distance = 0) {
     this.#driverName = driverName;
-    this.#distance = 0;
+    this.#distance = distance;
   }
 
   move() {
