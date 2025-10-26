@@ -1,5 +1,5 @@
 import ERROR_MESSAGE from '../src/constants/error.js';
-import Validator from '../src/Validator.js';
+import Validator from '../src/utils/Validator.js';
 import Car from '../src/model/Car.js';
 
 describe('Validator Class', () => {

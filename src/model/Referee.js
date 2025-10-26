@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import Validator from '../Validator.js';
+import Validator from '../utils/Validator.js';
 
 class Referee {
   static getWinningCars(cars) {

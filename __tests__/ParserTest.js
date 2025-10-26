@@ -1,5 +1,5 @@
 import ERROR_MESSAGE from '../src/constants/error.js';
-import Parser from '../src/Parser.js';
+import Parser from '../src/utils/Parser.js';
 
 describe('Parser Class', () => {
   describe('parsePlayersFromString Method', () => {
