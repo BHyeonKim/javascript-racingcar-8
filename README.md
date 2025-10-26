@@ -56,8 +56,12 @@
 
 ### Referee
 
-#### `getWinner(Car[]) => string[]`
-> - [ ] 우승자 이름의 배열을 반환하는 메소드
+#### `getWinningCars(Car[]) => Car[]`
+> - [x] 우승자 차량을 반환하는 메서드
+
+#### `getDriverNames(Car[]) => string[]`
+> - [x] 차량들의 드라이버를 배열에 담아 반환하는 메서드
+
 
 ### Validator
 
