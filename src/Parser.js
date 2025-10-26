@@ -17,6 +17,14 @@ class Parser {
 
     return driverNames;
   }
+
+  static parseRound(string) {
+    const round = Number(string);
+
+    Validator.validatePositiveNumber(round);
+
+    return round;
+  }
 }
 
 export default Parser;
