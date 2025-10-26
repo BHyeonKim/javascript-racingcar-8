@@ -1,4 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
+import Validator from './Validator.js';
 
 class View {
   static async getInput(query) {
@@ -6,8 +7,20 @@ class View {
     return input;
   }
 
-  static print(message) {
+  static print(message = '') {
     MissionUtils.Console.print(message);
+  }
+
+  static printEmptyLine() {
+    View.print();
+  }
+
+  static printCarState(car) {
+    Validator.validateIsCar(car);
+
+    const distance = '-'.repeat(car.distance);
+
+    View.print(`${car.driverName} : ${distance}`);
   }
 }
 
