@@ -1,6 +1,6 @@
 import ERROR_MESSAGE from '../src/constants/error.js';
 import Validator from '../src/utils/Validator.js';
-import Car from '../src/model/Car.js';
+import Car from '../src/models/Car.js';
 
 describe('Validator Class', () => {
   describe('validateNotEmptyString Method', () => {

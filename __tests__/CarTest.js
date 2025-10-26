@@ -1,4 +1,4 @@
-import Car from '../src/model/Car.js';
+import Car from '../src/models/Car.js';
 
 const INITIAL_DISTANCE = 0;
 

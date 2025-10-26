@@ -1,6 +1,6 @@
 import ERROR_MESSAGE from '../src/constants/error.js';
-import Car from '../src/model/Car.js';
-import Referee from '../src/model/Referee.js';
+import Car from '../src/models/Car.js';
+import Referee from '../src/models/Referee.js';
 
 describe('Referee class', () => {
   describe('getWinningCars Method', () => {

@@ -1,4 +1,4 @@
-import Car from '../model/Car.js';
+import Car from '../models/Car.js';
 import ERROR_MESSAGE from '../constants/error.js';
 
 class Validator {

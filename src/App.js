@@ -1,8 +1,8 @@
 import MESSAGES from './constants/message.js';
 import Parser from './utils/Parser.js';
 import View from './View.js';
-import Car from './model/Car.js';
-import Referee from './model/Referee.js';
+import Car from './models/Car.js';
+import Referee from './models/Referee.js';
 import ERROR_MESSAGE from './constants/error.js';
 
 class App {
