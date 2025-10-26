@@ -85,5 +85,5 @@
 
 ### Parser
 
-#### `parsePlayer(string) => string[]`
-> - [ ] 문자열로부터 플레이어를 파싱하는 메서드
+#### `parsePlayersFromString(string) => string[]`
+> - [x] 문자열로부터 플레이어를 파싱하는 메서드
