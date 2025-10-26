@@ -32,13 +32,16 @@
 
 ## 컴포넌트 구성
 1. View
-2. Controller(app)
+2. Controller(App)
 3. Model
   - Car
   - Referee
-4. ETC
+4. Utils
   - Validator
   - Parser
+5. Constants
+  - message
+  - error
 
 ## 기능 목록
 
@@ -46,8 +49,14 @@
 #### `getInput(string) => string`
 > - [x] 사용자에게 입력을 받는 메서드
 
-#### `print() => void`
+#### `print(string) => void`
 > - [x] 출력 메서드
+
+#### `printEmptyLine() => void`
+> - [x] 빈 줄을 출력하는 메서드
+
+#### `printCarState(Car) => void`
+> - [x] 차량의 상태를 출력하는 메서드
 
 ### Car
 
@@ -61,6 +70,12 @@
 
 #### `getDriverNames(Car[]) => string[]`
 > - [x] 차량들의 드라이버를 배열에 담아 반환하는 메서드
+
+#### `playRound(Car[]) => void`
+> - [x] 한 라운드를 진행하는 메서드 (각 차량을 랜덤값에 따라 전진시킴)
+
+#### `generateRandomNumber() => number`
+> - [x] 0~9 사이의 랜덤 숫자를 생성하는 메서드
 
 
 ### Validator
@@ -83,7 +98,16 @@
 #### `validateIsArray(arr) => void`
 > - [x] 배열인지 검증하는 메서드
 
+#### `validateIsCar(car) => void`
+> - [x] Car 인스턴스인지 검증하는 메서드
+
+#### `validateIsString(string) => void`
+> - [x] 문자열인지 검증하는 메서드
+
 ### Parser
 
 #### `parsePlayersFromString(string) => string[]`
 > - [x] 문자열로부터 플레이어를 파싱하는 메서드
+
+#### `parseRound(string) => number`
+> - [x] 문자열로부터 라운드 수를 파싱하는 메서드
