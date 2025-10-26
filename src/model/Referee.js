@@ -21,6 +21,16 @@ class Referee {
 
     return winningCars;
   }
+
+  static getDriverNames(cars) {
+    Validator.validateIsArray(cars);
+
+    cars.forEach((car) => {
+      Validator.validateIsCar(car);
+    });
+
+    return cars.map((car) => car.driverName);
+  }
 }
 
 export default Referee;
