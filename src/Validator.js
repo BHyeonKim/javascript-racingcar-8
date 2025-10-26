@@ -49,6 +49,12 @@ class Validator {
       throw new Error(ERROR_MESSAGE.NOT_CAR);
     }
   }
+
+  static validateIsString(string) {
+    if (typeof string !== 'string') {
+      throw new Error(ERROR_MESSAGE.NOT_STRING);
+    }
+  }
 }
 
 export default Validator;
