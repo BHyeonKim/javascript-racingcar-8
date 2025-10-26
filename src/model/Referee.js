@@ -1,3 +1,4 @@
+import { MissionUtils } from '@woowacourse/mission-utils';
 import Validator from '../Validator.js';
 
 class Referee {
@@ -30,6 +31,22 @@ class Referee {
     });
 
     return cars.map((car) => car.driverName);
+  }
+
+  static playRound(cars) {
+    Validator.validateIsArray(cars);
+
+    cars.forEach((car) => {
+      Validator.validateIsCar(car);
+    });
+
+    cars.forEach((car) => {
+      const randomNumber = Referee.generateRandomNumber();
+
+      if (randomNumber >= 4) {
+        car.move();
+      }
+    });
   }
 }
 
