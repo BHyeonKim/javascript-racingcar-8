@@ -38,6 +38,12 @@ class Validator {
     }
   }
 
+  static validateInteger(number) {
+    if (!Number.isInteger(number)) {
+      throw new Error(ERROR_MESSAGE.NOT_INTEGER);
+    }
+  }
+
   static validateIsArray(arr) {
     if (!Array.isArray(arr)) {
       throw new Error(ERROR_MESSAGE.NOT_ARRAY);
