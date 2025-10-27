@@ -54,14 +54,11 @@ describe('Validator Class', () => {
       [['test1', 'test2', 'test3', 'test1'], 'string items'],
       [[1, 2, 3, 1], 'number items'],
       [[1, 2, 'test1', 1], 'mixed type items'],
-    ])(
-      'should throw an error if duplication exists: %s (%s)',
-      (input) => {
-        expect(() => Validator.validateNoDuplication(input)).toThrow(
-          ERROR_MESSAGE.DUPLICATED_ARRAY_ITEM,
-        );
-      },
-    );
+    ])('should throw an error if duplication exists: %s (%s)', (input) => {
+      expect(() => Validator.validateNoDuplication(input)).toThrow(
+        ERROR_MESSAGE.DUPLICATED_ARRAY_ITEM,
+      );
+    });
 
     it('should not throw an error if there is no duplication', () => {
       const input = ['test1', 'test2', 'test3'];
@@ -115,9 +112,12 @@ describe('Validator Class', () => {
       [1, 'one'],
       [100, 'large number'],
       [3.14, 'decimal'],
-    ])('should not throw an error for valid positive number: %s (%s)', (input) => {
-      expect(() => Validator.validatePositiveNumber(input)).not.toThrow();
-    });
+    ])(
+      'should not throw an error for valid positive number: %s (%s)',
+      (input) => {
+        expect(() => Validator.validatePositiveNumber(input)).not.toThrow();
+      },
+    );
   });
   describe('validateIsArray', () => {
     it.each([
