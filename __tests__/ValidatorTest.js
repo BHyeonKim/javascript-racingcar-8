@@ -12,21 +12,11 @@ describe('Validator Class', () => {
       );
     });
 
-    it('should not throw error if length of string is one', () => {
-      const string = 'a';
-
-      expect(() => Validator.validateNotEmptyString(string)).not.toThrow();
-    });
-
-    it('should not throw error if length of string is more than 1', () => {
-      const string = 'abc';
-
-      expect(() => Validator.validateNotEmptyString(string)).not.toThrow();
-    });
-
-    it('should not throw an error if string is special character', () => {
-      const string = '\\';
-
+    it.each([
+      ['a', 'single character'],
+      ['abc', 'multiple characters'],
+      ['\\', 'special character'],
+    ])('should not throw error for valid string: %s (%s)', (string) => {
       expect(() => Validator.validateNotEmptyString(string)).not.toThrow();
     });
   });
@@ -40,17 +30,11 @@ describe('Validator Class', () => {
       );
     });
 
-    it('should not throw an error if length of string is 5', () => {
-      const string = 'abcde';
-
-      expect(() =>
-        Validator.validateNotExceedFiveCharacter(string),
-      ).not.toThrow();
-    });
-
-    it('should not throw an error if length of string is less than 5', () => {
-      const string = 'a';
-
+    it.each([
+      ['abcde', 'exactly 5 characters'],
+      ['a', 'less than 5 characters'],
+      ['abc', '3 characters'],
+    ])('should not throw error for valid string: %s (%s)', (string) => {
       expect(() =>
         Validator.validateNotExceedFiveCharacter(string),
       ).not.toThrow();
@@ -66,29 +50,18 @@ describe('Validator Class', () => {
       );
     });
 
-    it('should throw an error if duplication exists in array with string items', () => {
-      const input = ['test1', 'test2', 'test3', 'test1'];
-
-      expect(() => Validator.validateNoDuplication(input)).toThrow(
-        ERROR_MESSAGE.DUPLICATED_ARRAY_ITEM,
-      );
-    });
-
-    it('should throw an error if duplication exists in array with number items', () => {
-      const input = [1, 2, 3, 1];
-
-      expect(() => Validator.validateNoDuplication(input)).toThrow(
-        ERROR_MESSAGE.DUPLICATED_ARRAY_ITEM,
-      );
-    });
-
-    it('should throw an error if duplication exists in array with mixed type of items', () => {
-      const input = [1, 2, 'test1', 1];
-
-      expect(() => Validator.validateNoDuplication(input)).toThrow(
-        ERROR_MESSAGE.DUPLICATED_ARRAY_ITEM,
-      );
-    });
+    it.each([
+      [['test1', 'test2', 'test3', 'test1'], 'string items'],
+      [[1, 2, 3, 1], 'number items'],
+      [[1, 2, 'test1', 1], 'mixed type items'],
+    ])(
+      'should throw an error if duplication exists: %s (%s)',
+      (input) => {
+        expect(() => Validator.validateNoDuplication(input)).toThrow(
+          ERROR_MESSAGE.DUPLICATED_ARRAY_ITEM,
+        );
+      },
+    );
 
     it('should not throw an error if there is no duplication', () => {
       const input = ['test1', 'test2', 'test3'];
@@ -97,82 +70,91 @@ describe('Validator Class', () => {
     });
   });
   describe('validateNumber', () => {
-    it('should throw an error if input is not a number', () => {
-      const input = [undefined, null, [], {}, 'string'];
-
-      input.forEach((value) => {
-        expect(() => Validator.validateNumber(value)).toThrow(
-          ERROR_MESSAGE.NOT_NUMBER,
-        );
-      });
+    it.each([
+      [undefined, 'undefined'],
+      [null, 'null'],
+      [[], 'array'],
+      [{}, 'object'],
+      ['string', 'string'],
+      [NaN, 'NaN'],
+    ])('should throw an error if input is not a number: %s (%s)', (value) => {
+      expect(() => Validator.validateNumber(value)).toThrow(
+        ERROR_MESSAGE.NOT_NUMBER,
+      );
     });
 
-    it('should not throw an error if input is a number', () => {
-      const input = 10;
-
+    it.each([
+      [10, 'positive number'],
+      [0, 'zero'],
+      [-5, 'negative number'],
+      [3.14, 'decimal'],
+    ])('should not throw an error for valid number: %s (%s)', (input) => {
       expect(() => Validator.validateNumber(input)).not.toThrow();
     });
   });
   describe('validatePositiveNumber', () => {
-    it('should throw an error if input is not a number', () => {
-      const input = [undefined, null, [], {}, 'string'];
-
-      input.forEach((value) => {
+    it.each([
+      [undefined, 'undefined', ERROR_MESSAGE.NOT_NUMBER],
+      [null, 'null', ERROR_MESSAGE.NOT_NUMBER],
+      [[], 'array', ERROR_MESSAGE.NOT_NUMBER],
+      [{}, 'object', ERROR_MESSAGE.NOT_NUMBER],
+      ['string', 'string', ERROR_MESSAGE.NOT_NUMBER],
+      [-10, 'negative number', ERROR_MESSAGE.NOT_POSITIVE_NUMBER],
+      [0, 'zero', ERROR_MESSAGE.NOT_POSITIVE_NUMBER],
+    ])(
+      'should throw an error for invalid input: %s (%s)',
+      (value, _, expectedError) => {
         expect(() => Validator.validatePositiveNumber(value)).toThrow(
-          ERROR_MESSAGE.NOT_NUMBER,
+          expectedError,
         );
-      });
-    });
+      },
+    );
 
-    it('should throw an error if input is negative number', () => {
-      const input = -10;
-
-      expect(() => Validator.validatePositiveNumber(input)).toThrow(
-        ERROR_MESSAGE.NOT_POSITIVE_NUMBER,
-      );
-    });
-
-    it('should throw an error if input is zero', () => {
-      const input = 0;
-
-      expect(() => Validator.validatePositiveNumber(input)).toThrow(
-        ERROR_MESSAGE.NOT_POSITIVE_NUMBER,
-      );
-    });
-
-    it('should not throw an error if input is positive number', () => {
-      const input = 10;
-
+    it.each([
+      [10, 'positive integer'],
+      [1, 'one'],
+      [100, 'large number'],
+      [3.14, 'decimal'],
+    ])('should not throw an error for valid positive number: %s (%s)', (input) => {
       expect(() => Validator.validatePositiveNumber(input)).not.toThrow();
     });
   });
   describe('validateIsArray', () => {
-    it('should throw an error if input is not an array', () => {
-      const input = ['string', {}, 0, undefined, null];
-
-      input.forEach((value) => {
-        expect(() => Validator.validateIsArray(value)).toThrow(
-          ERROR_MESSAGE.NOT_ARRAY,
-        );
-      });
+    it.each([
+      ['string', 'string'],
+      [{}, 'object'],
+      [0, 'number'],
+      [undefined, 'undefined'],
+      [null, 'null'],
+      [true, 'boolean'],
+    ])('should throw an error if input is not an array: %s (%s)', (value) => {
+      expect(() => Validator.validateIsArray(value)).toThrow(
+        ERROR_MESSAGE.NOT_ARRAY,
+      );
     });
 
-    it('should not throw an error if input is an array', () => {
-      const input = [];
-
+    it.each([
+      [[], 'empty array'],
+      [[1, 2, 3], 'array with numbers'],
+      [['a', 'b'], 'array with strings'],
+    ])('should not throw an error for valid array: %s (%s)', (input) => {
       expect(() => Validator.validateIsArray(input)).not.toThrow();
     });
   });
 
   describe('validateIsCar', () => {
-    it('should throw an error if input is not an array of car', () => {
-      const testCases = [{}, [], ' ', 1, undefined, null, true];
-
-      testCases.forEach((testCase) => {
-        expect(() => Validator.validateIsCar(testCase)).toThrow(
-          ERROR_MESSAGE.NOT_CAR,
-        );
-      });
+    it.each([
+      [{}, 'object'],
+      [[], 'array'],
+      [' ', 'string'],
+      [1, 'number'],
+      [undefined, 'undefined'],
+      [null, 'null'],
+      [true, 'boolean'],
+    ])('should throw an error if input is not a Car: %s (%s)', (testCase) => {
+      expect(() => Validator.validateIsCar(testCase)).toThrow(
+        ERROR_MESSAGE.NOT_CAR,
+      );
     });
 
     it('should not throw an error if input is instance of Car', () => {
