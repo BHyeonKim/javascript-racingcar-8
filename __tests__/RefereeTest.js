@@ -25,30 +25,33 @@ describe('Referee class', () => {
       expect(Referee.getWinningCars([])).toEqual([]);
     });
 
-    it('should throw an error if input is not an array', () => {
-      const testCases = [' ', 5, false, {}];
-
-      testCases.forEach((testcase) => {
+    it.each([
+      [' ', 'string'],
+      [5, 'number'],
+      [false, 'boolean'],
+      [{}, 'object'],
+    ])(
+      'should throw an error if input is not an array (%s: %s)',
+      (testcase) => {
         expect(() => Referee.getWinningCars(testcase)).toThrow(
           ERROR_MESSAGE.NOT_ARRAY,
         );
-      });
-    });
+      },
+    );
 
-    it('should throw an error if input is not array of cars', () => {
-      const testCases = [
-        [{}, {}, {}],
-        [5, 6, 7],
-        [' ', ' '],
-        [false, true],
-      ];
-
-      testCases.forEach((testCase) => {
+    it.each([
+      [[{}, {}, {}], 'empty objects'],
+      [[5, 6, 7], 'numbers'],
+      [[' ', ' '], 'strings'],
+      [[false, true], 'booleans'],
+    ])(
+      'should throw an error if input is not array of cars (%s)',
+      (testCase) => {
         expect(() => Referee.getWinningCars(testCase)).toThrow(
           ERROR_MESSAGE.NOT_CAR,
         );
-      });
-    });
+      },
+    );
   });
   describe('getDriverNames Method', () => {
     it('should return array of driver names', () => {
@@ -63,30 +66,33 @@ describe('Referee class', () => {
       ]);
     });
 
-    it('should throw an error if input is not an array', () => {
-      const testCases = [' ', 5, false, {}];
-
-      testCases.forEach((testcase) => {
-        expect(() => Referee.getWinningCars(testcase)).toThrow(
+    it.each([
+      [' ', 'string'],
+      [5, 'number'],
+      [false, 'boolean'],
+      [{}, 'object'],
+    ])(
+      'should throw an error if input is not an array (%s: %s)',
+      (testcase) => {
+        expect(() => Referee.getDriverNames(testcase)).toThrow(
           ERROR_MESSAGE.NOT_ARRAY,
         );
-      });
-    });
+      },
+    );
 
-    it('should throw an error if input is not array of cars', () => {
-      const testCases = [
-        [{}, {}, {}],
-        [5, 6, 7],
-        [' ', ' '],
-        [false, true],
-      ];
-
-      testCases.forEach((testCase) => {
-        expect(() => Referee.getWinningCars(testCase)).toThrow(
+    it.each([
+      [[{}, {}, {}], 'empty objects'],
+      [[5, 6, 7], 'numbers'],
+      [[' ', ' '], 'strings'],
+      [[false, true], 'booleans'],
+    ])(
+      'should throw an error if input is not array of cars (%s)',
+      (testCase) => {
+        expect(() => Referee.getDriverNames(testCase)).toThrow(
           ERROR_MESSAGE.NOT_CAR,
         );
-      });
-    });
+      },
+    );
   });
   describe('playRound Method', () => {
     afterEach(() => {
@@ -151,29 +157,32 @@ describe('Referee class', () => {
       expect(spiedGenerateRandomNumber).toHaveBeenCalledTimes(3);
     });
 
-    it('should throw an error if input is not an array', () => {
-      const testCases = [' ', 5, false, {}];
-
-      testCases.forEach((testcase) => {
+    it.each([
+      [' ', 'string'],
+      [5, 'number'],
+      [false, 'boolean'],
+      [{}, 'object'],
+    ])(
+      'should throw an error if input is not an array (%s: %s)',
+      (testcase) => {
         expect(() => Referee.playRound(testcase)).toThrow(
           ERROR_MESSAGE.NOT_ARRAY,
         );
-      });
-    });
+      },
+    );
 
-    it('should throw an error if input is not array of cars', () => {
-      const testCases = [
-        [{}, {}, {}],
-        [5, 6, 7],
-        [' ', ' '],
-        [false, true],
-      ];
-
-      testCases.forEach((testCase) => {
+    it.each([
+      [[{}, {}, {}], 'empty objects'],
+      [[5, 6, 7], 'numbers'],
+      [[' ', ' '], 'strings'],
+      [[false, true], 'booleans'],
+    ])(
+      'should throw an error if input is not array of cars (%s)',
+      (testCase) => {
         expect(() => Referee.playRound(testCase)).toThrow(
           ERROR_MESSAGE.NOT_CAR,
         );
-      });
-    });
+      },
+    );
   });
 });
