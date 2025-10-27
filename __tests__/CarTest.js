@@ -10,10 +10,14 @@ describe('Car class', () => {
     car = new Car(driverName);
   });
 
-  it('should store driver name correctly', () => {
-    car = new Car(driverName);
-
-    expect(car.driverName).toBe(driverName);
+  it.each([
+    ['BHyeon', 'English name'],
+    ['포비', 'Korean name'],
+    ['a', 'single character'],
+    ['12345', 'numbers'],
+  ])('should store driver name correctly: %s (%s)', (name) => {
+    car = new Car(name);
+    expect(car.driverName).toBe(name);
   });
 
   it('should have 0 distance after initialization', () => {
@@ -22,24 +26,35 @@ describe('Car class', () => {
     expect(car.distance).toBe(INITIAL_DISTANCE);
   });
 
-  it('should increase distance by 1 when move is called once', () => {
-    car = new Car(driverName);
+  it.each([
+    [1, 1, 'called once'],
+    [2, 2, 'called twice'],
+    [3, 3, 'called three times'],
+    [5, 5, 'called five times'],
+  ])(
+    'should increase distance by %i when move is called %s',
+    (callCount, expectedDistance) => {
+      car = new Car(driverName);
 
-    expect(car.distance).toBe(INITIAL_DISTANCE);
+      expect(car.distance).toBe(INITIAL_DISTANCE);
+
+      for (let i = 0; i < callCount; i += 1) {
+        car.move();
+      }
+
+      expect(car.distance).toBe(expectedDistance);
+    },
+  );
+
+  it('should accumulate distance correctly with initial distance', () => {
+    const initialDistance = 5;
+    car = new Car(driverName, initialDistance);
+
+    expect(car.distance).toBe(initialDistance);
 
     car.move();
-
-    expect(car.distance).toBe(INITIAL_DISTANCE + 1);
-  });
-
-  it('should increase distance by 2 when move is called twice', () => {
-    car = new Car(driverName);
-
-    expect(car.distance).toBe(INITIAL_DISTANCE);
-
-    car.move();
     car.move();
 
-    expect(car.distance).toBe(INITIAL_DISTANCE + 2);
+    expect(car.distance).toBe(initialDistance + 2);
   });
 });
