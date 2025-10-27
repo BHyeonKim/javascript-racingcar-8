@@ -3,94 +3,86 @@ import Parser from '../src/utils/Parser.js';
 
 describe('Parser Class', () => {
   describe('parsePlayersFromString Method', () => {
-    it('should throw an error if input is not a string', () => {
-      const testCases = [123, [], {}, null, undefined, true];
-
-      testCases.forEach((testCase) => {
+    it.each([
+      [123, 'number'],
+      [[], 'array'],
+      [{}, 'object'],
+      [null, 'null'],
+      [undefined, 'undefined'],
+      [true, 'boolean'],
+    ])(
+      'should throw an error if input is not a string: %s (%s)',
+      (testCase) => {
         expect(() => Parser.parsePlayersFromString(testCase)).toThrow(
           ERROR_MESSAGE.NOT_STRING,
         );
-      });
-    });
+      },
+    );
 
-    it('should throw an error if any driver name is empty string', () => {
-      const input = 'pobi,woni,,jun';
-
-      expect(() => Parser.parsePlayersFromString(input)).toThrow(
-        ERROR_MESSAGE.EMPTY_STRING,
-      );
-    });
-
-    it('should throw an error if any driver name exceeds 5 characters', () => {
-      const input = 'pobi,woniiiii,jun';
-
-      expect(() => Parser.parsePlayersFromString(input)).toThrow(
+    it.each([
+      ['pobi,woni,,jun', 'empty name', ERROR_MESSAGE.EMPTY_STRING],
+      [
+        'pobi,woniiiii,jun',
+        'name exceeds 5 characters',
         ERROR_MESSAGE.EXCEEDED_FIVE_CHARACTER,
-      );
-    });
-
-    it('should throw an error if there are duplicate driver names', () => {
-      const input = 'pobi,woni,jun,pobi';
-
-      expect(() => Parser.parsePlayersFromString(input)).toThrow(
+      ],
+      [
+        'pobi,woni,jun,pobi',
+        'duplicate names',
         ERROR_MESSAGE.DUPLICATED_ARRAY_ITEM,
-      );
-    });
+      ],
+      ['', 'empty string', ERROR_MESSAGE.EMPTY_STRING],
+      [',,,', 'only commas', ERROR_MESSAGE.EMPTY_STRING],
+    ])(
+      'should throw an error for invalid input: "%s" (%s)',
+      (input, _, expectedError) => {
+        expect(() => Parser.parsePlayersFromString(input)).toThrow(
+          expectedError,
+        );
+      },
+    );
 
-    it('should correctly parse comma-separated driver names', () => {
-      const input = 'pobi,woni,jun';
-
+    it.each([
+      ['pobi,woni,jun', ['pobi', 'woni', 'jun'], 'comma-separated names'],
+      ['pobi , woni , jun ', ['pobi', 'woni', 'jun'], 'names with whitespace'],
+      ['pobi', ['pobi'], 'single name'],
+      [
+        'a,bb,ccc,dddd,eeeee',
+        ['a', 'bb', 'ccc', 'dddd', 'eeeee'],
+        'various length names',
+      ],
+    ])('should correctly parse valid input: "%s" (%s)', (input, expected) => {
       const result = Parser.parsePlayersFromString(input);
-
-      expect(result).toEqual(['pobi', 'woni', 'jun']);
-    });
-
-    it('should trim whitespace from driver names', () => {
-      const input = 'pobi , woni , jun ';
-
-      const result = Parser.parsePlayersFromString(input);
-
-      expect(result).toEqual(['pobi', 'woni', 'jun']);
-    });
-
-    it('should handle single driver name', () => {
-      const input = 'pobi';
-
-      const result = Parser.parsePlayersFromString(input);
-
-      expect(result).toEqual(['pobi']);
+      expect(result).toEqual(expected);
     });
   });
 
   describe('parseRound Method', () => {
-    it('should throw an error if input is not a positive number', () => {
-      const input = '0';
+    it.each([
+      ['0', ERROR_MESSAGE.NOT_POSITIVE_NUMBER],
+      ['-5', ERROR_MESSAGE.NOT_POSITIVE_NUMBER],
+      ['-1', ERROR_MESSAGE.NOT_POSITIVE_NUMBER],
+      ['abc', ERROR_MESSAGE.NOT_NUMBER],
+      ['', ERROR_MESSAGE.EMPTY_STRING],
+      ['1.5', ERROR_MESSAGE.NOT_INTEGER],
+    ])(
+      'should throw an error for invalid input: "%s" (%s)',
+      (input, expectedError) => {
+        expect(() => Parser.parseRound(input)).toThrow(expectedError);
+      },
+    );
 
-      expect(() => Parser.parseRound(input)).toThrow(
-        ERROR_MESSAGE.NOT_POSITIVE_NUMBER,
-      );
-    });
-
-    it('should throw an error if input is negative number', () => {
-      const input = '-5';
-
-      expect(() => Parser.parseRound(input)).toThrow(
-        ERROR_MESSAGE.NOT_POSITIVE_NUMBER,
-      );
-    });
-
-    it('should throw an error if input is not a number', () => {
-      const input = 'abc';
-
-      expect(() => Parser.parseRound(input)).toThrow(ERROR_MESSAGE.NOT_NUMBER);
-    });
-
-    it('should correctly parse valid positive number string', () => {
-      const input = '5';
-
-      const result = Parser.parseRound(input);
-
-      expect(result).toBe(5);
-    });
+    it.each([
+      ['5', 5, 'single digit'],
+      ['1', 1, 'minimum positive'],
+      ['100', 100, 'large number'],
+      ['999', 999, 'three digit number'],
+    ])(
+      'should correctly parse valid positive number string: "%s" (%s)',
+      (input, expected) => {
+        const result = Parser.parseRound(input);
+        expect(result).toBe(expected);
+      },
+    );
   });
 });
