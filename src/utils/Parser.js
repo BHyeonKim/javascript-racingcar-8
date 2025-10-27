@@ -19,9 +19,12 @@ class Parser {
   }
 
   static parseRound(string) {
+    Validator.validateNotEmptyString(string);
+
     const round = Number(string);
 
     Validator.validatePositiveNumber(round);
+    Validator.validateInteger(round);
 
     return round;
   }
