@@ -82,9 +82,7 @@ describe('Parser Class', () => {
     it('should throw an error if input is not a number', () => {
       const input = 'abc';
 
-      expect(() => Parser.parseRound(input)).toThrow(
-        ERROR_MESSAGE.NOT_NUMBER,
-      );
+      expect(() => Parser.parseRound(input)).toThrow(ERROR_MESSAGE.NOT_NUMBER);
     });
 
     it('should correctly parse valid positive number string', () => {
@@ -94,5 +92,5 @@ describe('Parser Class', () => {
 
       expect(result).toBe(5);
     });
-  })
+  });
 });
